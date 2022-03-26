@@ -1,0 +1,62 @@
+.App {
+    display: grid;
+    grid-template-columns: 25% 70%;
+    background-color: rgb(195, 200, 221);
+}
+
+.navbar {
+    grid-column: 1;
+    position: absolute;
+}
+
+.nav-sec1 {
+    display: flex;
+    flex-direction: column;
+    background-color: rebeccapurple;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.nav-sec2 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.nav-sec3 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.notification-feedback {
+    margin: 1rem 0;
+    grid-column: 2;
+    height: 100px;
+    background-color: rgb(67, 68, 128);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.feedback {
+    grid-column: 2;
+    width: 70vw;
+    margin: .2rem
+}
+
+.feedback-info {
+    background-color: white;
+    border-radius: 10px;
+    margin: 1rem 0;
+    padding: 1rem;
+}
