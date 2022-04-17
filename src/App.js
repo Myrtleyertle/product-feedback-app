@@ -11,9 +11,12 @@ function App(id) {
 
   return (
     <div className="App">
+      <div>
       <Navbar className="navbar" />
-      <Header />
+      </div>
+      <div>
       <Feedback />
+      </div>
     </div>
   );
 }

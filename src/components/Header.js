@@ -1,17 +1,11 @@
 import {useContext, React} from "react";
-import DataContext  from "../context/data/dataContext";
+
 const Header = () => {
-  const dataContext = useContext(DataContext);
-  const { requests, sortByFilter, updateSortByFilter } = dataContext;
   
   let suggCount = 0;
-  for (let i = 0; i < requests.length; i++) {
-    if (requests[i]['status'] === 'suggestion') {
-      suggCount += 1;
-    }
-  }
+  
   return (
-    <div className="notification-feedback">
+    <div className="d-flex info">
       <img />
       <h3 className="suggestions-info">
         <span>{suggCount}</span>
