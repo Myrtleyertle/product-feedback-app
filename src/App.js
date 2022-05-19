@@ -1,23 +1,35 @@
-import logo from "./logo.svg";
+
 import "./App.css";
-import React from "react";
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Feedback from "./components/Feedback";
-
-function App(id) {
+import React, { useEffect } from "react";
+import Desktopview from "./Views/Desktopview";
+import Mobileview from "./Views/Mobileview";
+import { State }from "./context/data/Context";
+import { productRequest } from "./context/data/State";
+function App() {
  
-
-
+ const [width, setWidth] = React.useState(window.innerWidth);
+ useEffect(()=>{ 
+   window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    }
+    );
+    return () => {
+      window.removeEventListener("resize", () => {
+        setWidth(window.innerWidth);
+      }
+      );
+    }
+  }, []);
+ console.log(width); 
   return (
-    <div className="App">
-      <div>
-      <Navbar className="navbar" />
+    <React.Fragment>
+      <State.Provider value={productRequest}>
+      <div className="ui container">
+     {width > 450 ?  <Desktopview /> : null}
+      {width <= 450 ? <Mobileview/> : null}
       </div>
-      <div>
-      <Feedback />
-      </div>
-    </div>
+      </State.Provider>
+    </React.Fragment>
   );
 }
 

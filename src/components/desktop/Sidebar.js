@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
-const Navbar = () => {
+const Sidebar = () => {
   return (
     <nav className="d-block">
       <div className="nav-sec1">
@@ -24,7 +24,7 @@ const Navbar = () => {
             <Button variant="light">UI</Button>{" "}
             </Col>
             <Col>
-            <Button variant="light">UX</Button>{" "}
+            <Button variant="light">UX</Button>{" "}                     
             </Col>
         </Row>
         <Row>
@@ -55,4 +55,4 @@ const Navbar = () => {
     </nav>
   );
 };
-export default Navbar;
+export default Sidebar;
