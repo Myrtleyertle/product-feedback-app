@@ -1,16 +1,17 @@
 
 import React from 'react'
+import { useContext } from 'react'
+import { DataContext } from '../../context/data/dataContext'
 
-const Select = ({setFilter}) => {
-  console.log(setFilter)
+const Select = () => {
+  const dataContext = useContext(DataContext)
+  const {  setFilter, Filter } = dataContext
   return (
     <div className="dropdown" style={{display: 'flex'}}>
           <p>Sort By:</p>
           <select 
           style={{"width":"100px", height:"5 0px"}}
-            onChange={(event) => {
-              setFilter(event.target.value);
-            }}
+            onChange={(event) => setFilter(event)}
             
           >
             <option value="">All</option>

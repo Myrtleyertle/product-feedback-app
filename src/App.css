@@ -15,6 +15,10 @@
   .feedback-header {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(58, 62, 108);
+    color:rgb(255, 255, 255);
   }
 }
 @media (max-width: 450px) {

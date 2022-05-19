@@ -1,12 +1,12 @@
 import React from 'react'
-import MobileNavbar from '../components/mobile/MobileNavbar'
-import Feedback from '../components/FeedBack/Feedback'
+import MobileNavbar from './MobileNavbar'
+import Suggestion from '../Suggestions/Suggestions'
 const Mobileview = () => {
   return (
     <div className="App ui segment">
       <MobileNavbar />
       <div>
-        <Feedback className="" />
+        <Suggestion className="" />
       </div>
     </div>
   )
