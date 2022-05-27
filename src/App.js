@@ -18,7 +18,11 @@ function App() {
   
   return (
     <React.Fragment>
-        <div className="ui container">
+        <div style={{
+        width: "100%",
+        height: "100vh",
+        backgroundColor: "#F7F8FD",
+      }} >
           {width > 450 ? <Home /> : null}
           {width <= 450 ? <Mobileview /> : null}
         </div>

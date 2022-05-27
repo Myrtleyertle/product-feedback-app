@@ -9,6 +9,10 @@ import {
   HANDLE_CLICK,
   SET_FILTER,
   SELECT_FEEDBACK,
+  FLIP_SHOW,
+  ADD_COMMENT,
+  SET_ACTIVE_REQUEST,
+  ADD_REPLY,
 } from '../types';
 
 
@@ -20,6 +24,8 @@ export const dataReducer = (state, action) => {
         ...state,
         products: action.payload1,
         comments: action.payload2,
+        curUser: action.payload3,
+        replies: action.payload4,
       };
     case ADD_FEEDBACK:
       console.log("working");
@@ -83,8 +89,28 @@ export const dataReducer = (state, action) => {
           return request.id === action.payload1 ? {...action.payload2} : request;
         }),
       };
-      
+      case FLIP_SHOW:
+      return {
+        ...state,
+        show: !state.show,
+      };
+      case ADD_COMMENT:
+        return {
+        ...state,
+        comments: [...state.comments, action.payload2],
+      };
+      case SET_ACTIVE_REQUEST: 
+      return {
+        ...state,
+        activeRequest: action.payload,
+      };
+      case ADD_REPLY:
+      return {
+        ...state,
+        comments: action.payload1,
+        replies: action.payload2,
+      };
     default:
       return state;
   }
-};
+}

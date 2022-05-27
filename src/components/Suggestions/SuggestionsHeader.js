@@ -1,29 +1,34 @@
-import React, {useContext} from 'react'
-import Select from "../desktop/Select";
-import { DataContext } from '../../context/data/dataContext';
-import AddFeedbackModal from '../Modals/AddFeedbackModal';
-const SuggestionHeader = () => {
-  const dataContext = useContext(DataContext);
-  const { show, newFeedback, handleClick, target, addFeedback } = dataContext;
-  const titleRef = React.useRef();
-  const descriptionRef = React.useRef();
-  const statusRef = React.useRef();
-  const categoryRef = React.useRef();
-
-  
+import React, { useState } from "react";
+import Select from "./Select";
+import AddFeedbackModal from "../Modals/AddFeedbackModal";
+const SuggestionHeader = ({ suggestions }) => {
   return (
-    <div className="feedback-header" >
-        <img />
-        <h3 className="suggestions-info">
-          <span></span>
-          suggestions
-        </h3>
-        <Select />
+    <div className="feedback-header">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <div>
-         <AddFeedbackModal />
+          <img />
         </div>
-      </div >               
-  )
-}
+        <div className="suggestions-info">
+          <div style={{ margin: "0 10px", fontSize: "20px" }}>
+            {suggestions.length}
+          </div>
+          <div style={{ fontSize: "20px" }}>suggestions</div>
+        </div>
+        <div>
+          <Select />
+        </div>
+      </div>
+      <div>
+        <AddFeedbackModal />
+      </div>
+    </div>
+  );
+};
 
-export default SuggestionHeader
+export default SuggestionHeader;

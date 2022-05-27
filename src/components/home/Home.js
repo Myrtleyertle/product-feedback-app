@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
-import Sidebar from "../desktop/Sidebar";
-import '../../App.css';
+import Sidebar from "../Suggestions/Sidebar";
+import "../../App.css";
 import { DataContext } from "../../context/data/dataContext";
 import Suggestions from "../Suggestions/Suggestions";
 
@@ -11,9 +11,17 @@ export default function Desktopview() {
     getData();
   }, []);
   return (
-    <div className="desktopview">
-        <Sidebar />
-        <Suggestions className="" />
+    <div
+    className="ui container"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        width: "99%",
+      }}
+    >
+      <Sidebar />
+      <Suggestions className="" />
     </div>
   );
 }
