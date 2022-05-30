@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { DataContext } from "../../context/data/dataContext";
+import { DataContext } from "../context/data/dataContext";
 import Banner from "./Banner";
 import classes from "./Sidebar.module.css";
 const Sidebar = () => {

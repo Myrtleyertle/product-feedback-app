@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import FeedbackSelected from './FeedbackSelected'
-import Comments from './Comments.js.js'
+import Comments from './Comments.js.js.js.js'
 const CommentPage = () => {
   return (
     <div className="ui container">

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DataState } from "./context/data/dataState";
+import { DataState } from "./context/data/dataState.js";
 import { RoadmapPage } from "./components/roadmap/RoadMapPage";
 ReactDOM.render(
   <DataState>

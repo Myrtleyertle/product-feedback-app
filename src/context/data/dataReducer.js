@@ -2,18 +2,17 @@
 import {
   ADD_FEEDBACK,
   DELETE_FEEDBACK,
-  UPVOTE_INCREMENT,
+ INCREMENT,
   EDIT_FEEDBACK,
   GET_DATA,
   UPDATE_DATA,
-  HANDLE_CLICK,
   SET_FILTER,
   SELECT_FEEDBACK,
   FLIP_SHOW,
   ADD_COMMENT,
   SET_ACTIVE_REQUEST,
   ADD_REPLY,
-} from '../types';
+} from '../types.js';
 
 
 
@@ -40,22 +39,12 @@ export const dataReducer = (state, action) => {
           (productRequest) => productRequest.id !== action.payload
         ),
       };
-    case UPVOTE_INCREMENT:
+    case INCREMENT:
       return {
         ...state,
         products: state.products.map((request) =>
           request.id === action.payload
             ? { ...request, upvotes: request.upvotes + 1 }
-            : request
-        ),
-      };
-    case UPDATE_DATA:
-      sessionStorage.clear();
-      return {
-        ...state,
-        products: state.products.map((request) =>
-          request.id === action.payload1.id
-            ? sessionStorage.setItem("products",JSON.stringify({...request }))
             : request
         ),
       };
@@ -71,12 +60,6 @@ export const dataReducer = (state, action) => {
             : productRequest
         ),
       }; 
-    case HANDLE_CLICK:
-      return {
-        ...state,
-        show: !state.show,
-        target: action.payload,
-      };
     case SET_FILTER:
       return {
         ...state,
@@ -108,7 +91,6 @@ export const dataReducer = (state, action) => {
       return {
         ...state,
         comments: action.payload1,
-        replies: action.payload2,
       };
     default:
       return state;

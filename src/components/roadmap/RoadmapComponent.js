@@ -47,8 +47,8 @@ const RoadmapComponent = () => {
                       style={{
                         margin: "0 5px",
                         backgroundColor: "transparent",
-                      }}
-                      src={commentIcon}
+                      }} 
+                     alt="commenticon" src={commentIcon}
                     />
                     {products[index].comments &&
                     products[index].comments.length > 0

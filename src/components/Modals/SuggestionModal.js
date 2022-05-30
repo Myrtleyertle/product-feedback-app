@@ -5,7 +5,7 @@ import { DataContext } from "../../context/data/dataContext";
 import commentIcon from "../../shared/icon-comments.svg";
 import arrowUp from "../../shared/icon-arrow-up.svg";
 import leftArrow from "../../shared/icon-arrow-left.svg";
-import { Reply } from "../Suggestions/Reply";
+import { Reply } from "../Reply";
 const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
   const dataContext = useContext(DataContext);
   const {
@@ -35,9 +35,7 @@ const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
   const [content, setContent] = useState("");
   const feedback = products;
   const [show, setShow] = useState(false);
-  useEffect(() => {
-    getData(id, index);
-  }, []);
+ 
   return (
     <div>
       <div

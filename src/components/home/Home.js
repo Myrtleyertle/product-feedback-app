@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import Sidebar from "../Suggestions/Sidebar";
+import Sidebar from "../Sidebar";
 import "../../App.css";
 import { DataContext } from "../../context/data/dataContext";
 import Suggestions from "../Suggestions/Suggestions";

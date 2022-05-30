@@ -1,22 +1,21 @@
 import React from "react";
-import { DataContext } from "./dataContext";
+import {DataContext} from "../../context/data/dataContext";
 import { dataReducer } from "./dataReducer";
+import {useReducer} from "react";
 import data from "../../data.json";
 import {
   ADD_FEEDBACK,
   GET_DATA,
   DELETE_FEEDBACK,
-  UPVOTE_INCREMENT,
+  INCREMENT,
   EDIT_FEEDBACK,
   UPDATE_DATA,
-  HANDLE_CLICK,
   SET_FILTER,
   FLIP_SHOW,
   ADD_COMMENT,
   SET_ACTIVE_REQUEST,
   ADD_REPLY,
-} from "../types";
-
+} from "../types.js";
 export const DataState = (props) => {
   const newFeedback = {
     title: "",
@@ -33,10 +32,9 @@ export const DataState = (props) => {
     user: {},
   };
 
-  const initailState = {
+  const State = {
     products: [],
     activeComment: [],
-    replies: [],
     curUser: {},
     comments: [],
     Filter: "",
@@ -46,14 +44,14 @@ export const DataState = (props) => {
     newReply: newReply,
     id: data.productRequests.map((request) => request.id),
   };
-  const [state, dispatch] = React.useReducer(dataReducer, initailState);
+  const [state, dispatch] = useReducer(dataReducer, State);
 
-  const getData = (id, index, curReply) => {
+  const getData = () => {
     console.log("ran");
-    sessionStorage.clear();
     if (
       sessionStorage.getItem("products") === null &&
-      sessionStorage.getItem("curUser") === null
+      sessionStorage.getItem("curUser") === null && 
+      sessionStorage.getItem("comments") === null
     ) {
       const data = require("../../data.json");
       
@@ -69,12 +67,12 @@ export const DataState = (props) => {
       );
       sessionStorage.setItem("curUser", JSON.stringify(data.currentUser));
     }
-    const comments = data.productRequests.map(
-      (productRequest) => productRequest.comments
-    );
+    const comments = JSON.parse(sessionStorage.getItem("comments"));
+   //
     // set active to comments
+
     for (let i = 0; i < comments.length; i++) {
-      if(comments[i] === undefined){
+      if(comments[i] === undefined || comments[i] === null){
         comments[i] = [];
       } else {
         for (let j = 0; j < comments[i].length; j++) {
@@ -121,14 +119,11 @@ export const DataState = (props) => {
   const addFeedback = (newFeedback) => {
     dispatch({ type: ADD_FEEDBACK, payload: newFeedback });
   };
-  const incrementUpvote = (id) => {
-    dispatch({ type: UPVOTE_INCREMENT, payload: id });
+  const increment= (id) => {
+    dispatch({ type: INCREMENT, payload: id });
   };
   const editFeedback = () => {
     dispatch({ type: EDIT_FEEDBACK, payload: newFeedback });
-  };
-  const updateData = (id, feedback) => {
-    dispatch({ type: UPDATE_DATA, payload1: id, payload2: feedback });
   };
   const setFilter = (event) => {
     dispatch({ type: SET_FILTER, payload: event.target.value });
@@ -174,7 +169,7 @@ export const DataState = (props) => {
       },
       replies: [],
     };
-    const newComments = state.comments[index].length> 0 ? state.comments[index].push(newComment) : state.comments[index] === undefined ? [...state.comments, newComment] : [...state.comments[index], newComment];
+    const newComments = state.comments[index].length === 0 ? state.comments[index].push(newComment) : state.comments[index] === undefined ? [...state.comments, newComment] : [...state.comments[index], newComment];
 
     dispatch({
       type: ADD_COMMENT,
@@ -192,14 +187,12 @@ export const DataState = (props) => {
         newComment: newComment,
         curUser: state.curUser,
         activeComment: state.activeComment,
-        replies: state.replies,
         newReply: state.newReply,
         setFilter,
         getData,
         addFeedback,
-        incrementUpvote,
+        increment,
         editFeedback,
-        updateData,
         deleteFeedback,
         flipShow,
         addComment,

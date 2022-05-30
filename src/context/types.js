@@ -1,6 +1,6 @@
 export const ADD_FEEDBACK = "ADD_FEEDBACK";
 export const DELETE_FEEDBACK = "DELETE_FEEDBACK";
-export const UPVOTE_INCREMENT = "UPVOTE_INCREMENT";
+export const INCREMENT = "INCREMENT";
 export const EDIT_FEEDBACK = "EDIT_FEEDBACK";
 export const GET_DATA = "GET_DATA";
 export const UPDATE_DATA = "UPDATE_DATA";
