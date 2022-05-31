@@ -24,7 +24,6 @@ export const dataReducer = (state, action) => {
         products: action.payload1,
         comments: action.payload2,
         curUser: action.payload3,
-        replies: action.payload4,
       };
     case ADD_FEEDBACK:
       console.log("working");
@@ -42,11 +41,7 @@ export const dataReducer = (state, action) => {
     case INCREMENT:
       return {
         ...state,
-        products: state.products.map((request) =>
-          request.id === action.payload
-            ? { ...request, upvotes: request.upvotes + 1 }
-            : request
-        ),
+        products: action.payload,
       };
     case EDIT_FEEDBACK:
       return {

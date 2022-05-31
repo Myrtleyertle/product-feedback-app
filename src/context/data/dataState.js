@@ -9,7 +9,6 @@ import {
   DELETE_FEEDBACK,
   INCREMENT,
   EDIT_FEEDBACK,
-  UPDATE_DATA,
   SET_FILTER,
   FLIP_SHOW,
   ADD_COMMENT,
@@ -49,9 +48,9 @@ export const DataState = (props) => {
   const getData = () => {
     console.log("ran");
     if (
-      sessionStorage.getItem("products") === null &&
-      sessionStorage.getItem("curUser") === null && 
-      sessionStorage.getItem("comments") === null
+      sessionStorage.getItem("products") === null ||
+      sessionStorage.getItem("comments") === null ||
+      sessionStorage.getItem("curUser") === null 
     ) {
       const data = require("../../data.json");
       
@@ -66,6 +65,7 @@ export const DataState = (props) => {
         )
       );
       sessionStorage.setItem("curUser", JSON.stringify(data.currentUser));
+     
     }
     const comments = JSON.parse(sessionStorage.getItem("comments"));
    //
@@ -82,7 +82,7 @@ export const DataState = (props) => {
     }
     // set active to replies
     for (let i = 0; i < comments.length; i++) {
-      if(comments[i] === undefined){
+      if(comments[i] === undefined || comments[i] === null){
         comments[i] = [];
       } else {
         for (let j = 0; j < comments[i].length; j++) {
@@ -96,6 +96,8 @@ export const DataState = (props) => {
         }
       }
     }
+    const upvotes = JSON.parse(sessionStorage.getItem("upvotes"));
+    console.log(upvotes)
     const curUser = JSON.parse(sessionStorage.getItem("curUser"));
     const products = JSON.parse(sessionStorage.getItem("products"));
     console.log(products)
@@ -104,7 +106,9 @@ export const DataState = (props) => {
       payload1: products,
       payload2: comments,
       payload3: curUser,
+      payload4: upvotes
     });
+    console.log(upvotes)
   };
   const newComment = {
     content: "",
@@ -119,15 +123,23 @@ export const DataState = (props) => {
   const addFeedback = (newFeedback) => {
     dispatch({ type: ADD_FEEDBACK, payload: newFeedback });
   };
-  const increment= (id) => {
-    dispatch({ type: INCREMENT, payload: id });
+
+  const incrementUpvote= (id,index) => {
+
+    const updateProduct = state.products.map(item => item.id === id ? {...item, upvotes: item.upvotes + 1 } : item )
+    sessionStorage.setItem('products',JSON.stringify(updateProduct))
+    const updatedProducts = JSON.parse(sessionStorage.getItem('products'))
+    dispatch({ type: INCREMENT , payload:  updatedProducts});
   };
+
   const editFeedback = () => {
     dispatch({ type: EDIT_FEEDBACK, payload: newFeedback });
   };
+
   const setFilter = (event) => {
     dispatch({ type: SET_FILTER, payload: event.target.value });
   };
+  
   const deleteFeedback = (id) => {
     dispatch({ type: DELETE_FEEDBACK, payload: id });
   };
@@ -135,6 +147,7 @@ export const DataState = (props) => {
   const flipShow = () => {
     dispatch({ type: FLIP_SHOW });
   };
+
   const setActiveComment = (comments, index) => {
     dispatch({ type: SET_ACTIVE_REQUEST, payload: comments[index] });
   };
@@ -191,7 +204,7 @@ export const DataState = (props) => {
         setFilter,
         getData,
         addFeedback,
-        increment,
+        incrementUpvote,
         editFeedback,
         deleteFeedback,
         flipShow,

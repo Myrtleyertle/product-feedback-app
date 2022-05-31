@@ -11,12 +11,9 @@ const Suggestions = () => {
   const {
     products,
     incrementUpvote,
-    updateData,
-    addFeedback,
     Filter,
     comments,
     setActiveComment,
-    activeComment,
   } = dataContext;
   const suggestionObj = products.filter(
     (product, index) => product.status === "suggestion"
@@ -44,9 +41,8 @@ const Suggestions = () => {
       return feedback;
     }
   });
-  
   const suggestions = filteredSuggestions.map((feedback, index) => {
-   
+                    
     const { id, title, category, description, upvotes } = feedback;
     return (
       <div key={id} className={classes.suggestion}>
@@ -57,8 +53,7 @@ const Suggestions = () => {
                 className={classes.upvotebutton}
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
-                  incrementUpvote(id);
-                  updateData(id, feedback);
+                  incrementUpvote(id,index);
                 }}
               >
                 <img
