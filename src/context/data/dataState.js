@@ -80,6 +80,7 @@ export const DataState = (props) => {
         }
       }
     }
+    // MERGE INTO ONE for active loops 
     // set active to replies
     for (let i = 0; i < comments.length; i++) {
       if(comments[i] === undefined || comments[i] === null){
@@ -169,7 +170,9 @@ export const DataState = (props) => {
     currentReplies.push(newReply);
     curComment.replies = currentReplies;
     const newComments = [...state.comments, curComment];
-    dispatch({ type: ADD_REPLY,  payload1: newComments });
+    sessionStorage.setItem('comments', JSON.stringify(newComments))
+    const updatedComments = JSON.parse(sessionStorage.getItem('comments'));
+    dispatch({ type: ADD_REPLY,  payload1: updatedComments });
   };
   const addComment = (index, content) => {
     const newComment = {
@@ -182,11 +185,12 @@ export const DataState = (props) => {
       },
       replies: [],
     };
-    const newComments = state.comments[index].length === 0 ? state.comments[index].push(newComment) : state.comments[index] === undefined ? [...state.comments, newComment] : [...state.comments[index], newComment];
-
+    const newComments = state.comments[index].length >= 0 ? state.comments[index].push(newComment) : state.comments[index] === undefined ? [...state.comments, newComment] : [...state.comments[index], newComment];
+    sessionStorage.setItem('comments', JSON.stringify(newComments))
+    const updatedComments = JSON.parse(sessionStorage.getItem('comments'));
     dispatch({
       type: ADD_COMMENT,
-      payload2: newComments,
+      payload2: updatedComments,
     });
   };
   return (

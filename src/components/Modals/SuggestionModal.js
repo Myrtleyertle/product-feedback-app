@@ -31,7 +31,7 @@ const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
     setMaxRemaining(max - descriptionRef.current.value.length);
   };
   const id = products[index].id;
-  const comIndex = comments.findIndex((comment) => comment.id === undefined ? 'nope' : comment.id === id);
+  
   const [content, setContent] = useState("");
   const feedback = products;
   const [show, setShow] = useState(false);
