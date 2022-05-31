@@ -75,7 +75,7 @@ export const dataReducer = (state, action) => {
       case ADD_COMMENT:
         return {
         ...state,
-        comments: [...state.comments, action.payload2],
+        comments: [...state.comments, action.payload],
       };
       case SET_ACTIVE_REQUEST: 
       return {

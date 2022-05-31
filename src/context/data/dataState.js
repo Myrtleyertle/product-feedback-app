@@ -97,8 +97,6 @@ export const DataState = (props) => {
         }
       }
     }
-    const upvotes = JSON.parse(sessionStorage.getItem("upvotes"));
-    console.log(upvotes)
     const curUser = JSON.parse(sessionStorage.getItem("curUser"));
     const products = JSON.parse(sessionStorage.getItem("products"));
     console.log(products)
@@ -107,9 +105,7 @@ export const DataState = (props) => {
       payload1: products,
       payload2: comments,
       payload3: curUser,
-      payload4: upvotes
     });
-    console.log(upvotes)
   };
   const newComment = {
     content: "",
@@ -121,10 +117,11 @@ export const DataState = (props) => {
     },
     replies: [],
   };
+  // wokring kind of ( wont remain after reload)
   const addFeedback = (newFeedback) => {
     dispatch({ type: ADD_FEEDBACK, payload: newFeedback });
   };
-
+  // working
   const incrementUpvote= (id,index) => {
 
     const updateProduct = state.products.map(item => item.id === id ? {...item, upvotes: item.upvotes + 1 } : item )
@@ -132,27 +129,27 @@ export const DataState = (props) => {
     const updatedProducts = JSON.parse(sessionStorage.getItem('products'))
     dispatch({ type: INCREMENT , payload:  updatedProducts});
   };
-
+  // not working
   const editFeedback = () => {
     dispatch({ type: EDIT_FEEDBACK, payload: newFeedback });
   };
-
+ // working
   const setFilter = (event) => {
     dispatch({ type: SET_FILTER, payload: event.target.value });
   };
-  
+  // not working
   const deleteFeedback = (id) => {
     dispatch({ type: DELETE_FEEDBACK, payload: id });
   };
-
+  // probably could be moved to component level state 
   const flipShow = () => {
     dispatch({ type: FLIP_SHOW });
   };
-
+ // kinda useless right now
   const setActiveComment = (comments, index) => {
     dispatch({ type: SET_ACTIVE_REQUEST, payload: comments[index] });
   };
-
+ /// replies dont remain after reload of page 
   const addReply = (id,curReply,comment,replyTo) => {
     
     const curComment = comment;
@@ -170,9 +167,7 @@ export const DataState = (props) => {
     currentReplies.push(newReply);
     curComment.replies = currentReplies;
     const newComments = [...state.comments, curComment];
-    sessionStorage.setItem('comments', JSON.stringify(newComments))
-    const updatedComments = JSON.parse(sessionStorage.getItem('comments'));
-    dispatch({ type: ADD_REPLY,  payload1: updatedComments });
+    dispatch({ type: ADD_REPLY,  payload1: newComments });
   };
   const addComment = (index, content) => {
     const newComment = {
@@ -185,7 +180,7 @@ export const DataState = (props) => {
       },
       replies: [],
     };
-    const newComments = state.comments[index].length >= 0 ? state.comments[index].push(newComment) : state.comments[index] === undefined ? [...state.comments, newComment] : [...state.comments[index], newComment];
+    const newComments =  [...state.comments, state.comments[index].push(newComment)];
     sessionStorage.setItem('comments', JSON.stringify(newComments))
     const updatedComments = JSON.parse(sessionStorage.getItem('comments'));
     dispatch({
