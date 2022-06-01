@@ -137,7 +137,7 @@ export const DataState = (props) => {
   const setFilter = (event) => {
     dispatch({ type: SET_FILTER, payload: event.target.value });
   };
-  // not working
+  // functional but no styling
   const deleteFeedback = (id) => {
     dispatch({ type: DELETE_FEEDBACK, payload: id });
   };

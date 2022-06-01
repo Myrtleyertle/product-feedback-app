@@ -14,6 +14,7 @@ const Suggestions = () => {
     Filter,
     comments,
     setActiveComment,
+    deleteFeedback
   } = dataContext;
   const suggestionObj = products.filter(
     (product, index) => product.status === "suggestion"
@@ -78,6 +79,7 @@ const Suggestions = () => {
         >
           <SuggestionModal id={id} index={index} />
         </button>
+        <button onClick={() => deleteFeedback(id)}>delete </button>
       </div>
     );
   });
