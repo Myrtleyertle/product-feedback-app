@@ -14,7 +14,7 @@ const AddFeedbackModal = () => {
     setMaxRemaining(max -  descriptionRef.current.value.length);
   };
   return (
-    <>
+    <React.Fragment>
       <Button style={{backgroundColor: '#AD1FEA'}} onClick={() => flipShow()}>
        + Add Feedback
       </Button>
@@ -82,7 +82,7 @@ const AddFeedbackModal = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </React.Fragment>
   );
 };
 

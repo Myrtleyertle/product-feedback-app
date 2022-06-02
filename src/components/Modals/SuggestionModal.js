@@ -9,7 +9,6 @@ import { Reply } from "../Reply";
 const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
   const dataContext = useContext(DataContext);
   const {
-    newFeedback,
     products,
     comments,
     updateData,
@@ -17,11 +16,8 @@ const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
     addComment,
     newComment,
     setActiveComment,
-    activeComment,
-    replies,
     addReply,
     newReply,
-    getData,
   } = dataContext;
   const descriptionRef = useRef();
   const replyform = useRef();

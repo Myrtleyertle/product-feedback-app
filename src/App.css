@@ -4,12 +4,12 @@
 }
 @media (min-width: 455px) {
   .App {
-    flex-direction: row;
+    flex-direction: column;
     font-family: 'Jost', sans-serif;
   }
   .desktopview {
     display: flex;
-    flex-direction: c;
+    flex-direction: column;
   }
   .comments-header {
     display: flex;
@@ -68,7 +68,7 @@
 @media (max-width: 450px) {
   .App {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .navbar {

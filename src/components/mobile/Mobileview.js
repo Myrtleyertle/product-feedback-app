@@ -1,15 +1,14 @@
-import React from 'react'
-import MobileNavbar from './MobileNavbar'
-import Suggestion from '../Suggestions/Suggestions'
+import React from "react";
+import MobileNavbar from "./MobileNavbar";
+import MobileSuggestions from "./MobileSuggestions";
+import classes from './Mobileview.module.css'
 const Mobileview = () => {
   return (
-    <div className="App ui segment">
+    <div className="App">
       <MobileNavbar />
-      <div>
-        <Suggestion className="" />
-      </div>
+      <MobileSuggestions className="" />
     </div>
-  )
-}
+  );
+};
 
-export default Mobileview
+export default Mobileview;

@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import Select from "../Select";
 import AddFeedbackModal from "../Modals/AddFeedbackModal";
+import classes from './Suggestions.module.css'
 const SuggestionHeader = ({ suggestions }) => {
   return (
-    <div className="feedback-header">
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <div className={classes.suggestionsHeader}>
         <div>
-          <img />
-        </div>
-        <div className="suggestions-info">
           <div style={{ margin: "0 10px", fontSize: "20px" }}>
             {suggestions.length}
           </div>
@@ -23,11 +14,8 @@ const SuggestionHeader = ({ suggestions }) => {
         <div>
           <Select />
         </div>
-      </div>
-      <div>
         <AddFeedbackModal />
       </div>
-    </div>
   );
 };
 

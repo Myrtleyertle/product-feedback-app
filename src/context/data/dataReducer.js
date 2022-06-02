@@ -5,12 +5,9 @@ import {
  INCREMENT,
   EDIT_FEEDBACK,
   GET_DATA,
-  UPDATE_DATA,
   SET_FILTER,
-  SELECT_FEEDBACK,
   FLIP_SHOW,
   ADD_COMMENT,
-  SET_ACTIVE_REQUEST,
   ADD_REPLY,
 } from '../types.js';
 
@@ -60,13 +57,6 @@ export const dataReducer = (state, action) => {
         ...state,
         Filter: action.payload,
       };
-      case SELECT_FEEDBACK:
-      return {
-        ...state,
-        activeRequest: state.product.map((request, index) =>{
-          return request.id === action.payload1 ? {...action.payload2} : request;
-        }),
-      };
       case FLIP_SHOW:
       return {
         ...state,
@@ -76,11 +66,6 @@ export const dataReducer = (state, action) => {
         return {
         ...state,
         comments: [...state.comments, action.payload],
-      };
-      case SET_ACTIVE_REQUEST: 
-      return {
-        ...state,
-        activeRequest: action.payload,
       };
       case ADD_REPLY:
       return {

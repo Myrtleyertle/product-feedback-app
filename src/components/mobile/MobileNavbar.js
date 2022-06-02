@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState} from "react";
+import MobileBanner from "./MobileBanner";
 
 const MobileNavbar = () => {
-  return (
-    <div>MobileNavbar</div>
-  )
-}
 
-export default MobileNavbar
+  return (
+    <div>
+      <div><MobileBanner /></div>
+    </div>
+  );
+};
+
+export default MobileNavbar;

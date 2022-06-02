@@ -146,9 +146,7 @@ export const DataState = (props) => {
     dispatch({ type: FLIP_SHOW });
   };
  // kinda useless right now
-  const setActiveComment = (comments, index) => {
-    dispatch({ type: SET_ACTIVE_REQUEST, payload: comments[index] });
-  };
+ 
  /// replies dont remain after reload of page 
   const addReply = (id,curReply,comment,replyTo) => {
     
@@ -208,7 +206,6 @@ export const DataState = (props) => {
         deleteFeedback,
         flipShow,
         addComment,
-        setActiveComment,
         addReply,
       }}
     >
