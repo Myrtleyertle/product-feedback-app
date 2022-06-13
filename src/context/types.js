@@ -1,9 +1,0 @@
-export const ADD_FEEDBACK = "ADD_FEEDBACK";
-export const DELETE_FEEDBACK = "DELETE_FEEDBACK";
-export const INCREMENT = "INCREMENT";
-export const EDIT_FEEDBACK = "EDIT_FEEDBACK";
-export const GET_DATA = "GET_DATA";
-export const SET_FILTER = "SET_FILTER";
-export const FLIP_SHOW = "FLIP_SHOW";
-export const ADD_COMMENT = "ADD_COMMENT";
-export const ADD_REPLY = "ADD_REPLY";
