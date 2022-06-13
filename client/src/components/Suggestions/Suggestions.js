@@ -11,41 +11,41 @@ const Suggestions = () => {
   const {
     products,
     incrementUpvote,
-    Filter,
-    comments,
+    Filter,   
     setActiveComment,
     deleteFeedback
   } = dataContext;
-  const comIndex = comments.findIndex(comment => comment)
   
-  console.log(comments[0])
-  const suggestionObj = products.filter(
-    (product, index) => product.status === "suggestion"
-    );
-    if (Filter === "MostUp") {
-      suggestionObj.sort((a, b) => a.upvotes - b.upvotes);
-    } else if (Filter === "MostDown") {
-      suggestionObj.sort((a, b) => b.upvotes - a.upvotes);
-    } else if (Filter === "MostComments") {
-       suggestionObj.sort((a, b) => a.comments.length - b.comments.length);
-    } else if (Filter === "LeastComments") {
-      suggestionObj.sort((a, b) => b.comments.length - a.comments.length);
-    }
-  const suggestions = suggestionObj.filter((feedback, index) => {
-    if (Filter === "") {
+  console.log(products)
+
+    const suggestions = products.filter((feedback, index) => {
+      if (Filter === "") {
       return feedback;
     } else if (
       feedback.category.toLocaleLowerCase().includes(Filter.toLocaleLowerCase())
-    ) {
-      return feedback;
-    } else if (Filter === "All" && feedback.category !== "") {
-      return feedback;
-    } 
+      ) {
+        return feedback;
+      } else if (Filter === "All" && feedback.category !== "") {
+        return feedback;
+      } 
+      if (Filter === "MostUp") {
+        products.sort((a, b) => a.upvotes - b.upvotes);
+        return feedback;
+      } else if (Filter === "MostDown") {
+        products.sort((a, b) => b.upvotes - a.upvotes);
+        return feedback;
+      } else if (Filter === "MostComments") {
+         products.sort((a, b) => a.commentsCount - b.commentsCount);
+         return feedback;
+      } else if (Filter === "LeastComments") {
+        products.sort((a, b) => b.commentsCount - a.commentsCount);
+        return feedback;
+      }
   }).map((feedback, index) => {
                     
     const { id, title, category, description, upvotes } = feedback;
     return (
-      <div key={products.id} className={classes.suggestion}>
+      <div key={index} className={classes.suggestion}>
         <div className={classes.suggestionBody}>
           <div className={classes.suggestionupvotes}>
             <div>
@@ -75,7 +75,7 @@ const Suggestions = () => {
        <button onClick={() => setActiveComment(id,index)}>
           <SuggestionModal id={id} index={index} />
        </button>
-        <button onClick={() => deleteFeedback(id)}>delete </button>
+        <button onClick={() => deleteFeedback(id)}> delete </button>
       </div>
     );
   });

@@ -1,10 +1,9 @@
 const express = require('express');
-const {getProduct} = require('./productsFeedback.controller')
-const products = require('../models/product.model')
+
+const { getAllProducts, postUpdatedUpvotes } = require('./productsFeedback.controller')
+
 const productsRouter = express.Router();
 
-productsRouter.get('/products', function getProduct(req, res) {
-    return res.status(200).json(products)
-})
-
+productsRouter.get('/products', getAllProducts)
+productsRouter.post('/products', postUpdatedUpvotes )
 module.exports = productsRouter;

@@ -11,10 +11,11 @@ import {
   SET_FILTER,
   FLIP_SHOW,
   ADD_COMMENT,
-  SET_ACTIVE_REQUEST,
   SET_ACTIVE_COMMENT,
   ADD_REPLY,
 } from "../types.js";
+const PRODUCTS_URL = "http://localhost:7000/products";
+const USERS_URL = "http://localhost:7000/currentusers"
 export const DataState = (props) => {
   const newFeedback = {
     title: "",
@@ -44,75 +45,51 @@ export const DataState = (props) => {
   };
   const [state, dispatch] = useReducer(dataReducer, State);
 
-  const getData = () => {
-    console.log("ran");
-    let data;
-    fetch('http://localhost:7000/products')
-      .then(response => response.json())
-      .then(res => {
-        console.log(res.productRequests)
-        data = res
-        if (
-          sessionStorage.getItem("products") === null ||
-          sessionStorage.getItem("comments") === null ||
-          sessionStorage.getItem("curUser") === null
-        ) {
-    
-          sessionStorage.setItem(
-            "products",
-            JSON.stringify(data["productRequests"])
-          );
-          sessionStorage.setItem(
-            "comments",
-            JSON.stringify(
-              data.productRequests.map((productRequest) => productRequest.comments)
-            )
-          );
-          sessionStorage.setItem("curUser", JSON.stringify(data.currentUser));
-        }
-        const comments = JSON.parse(sessionStorage.getItem("comments"));
-        //
-        // set active to comments
-    
-        for (let i = 0; i < comments.length; i++) {
-          if (comments[i] === undefined || comments[i] === null) {
-            comments[i] = [];
-          } else {
-            for (let j = 0; j < comments[i].length; j++) {
-              comments[i][j]["active"] = false;
-            }
-          }
-        }
-        // MERGE INTO ONE for active loops
-        // set active to replies
-        for (let i = 0; i < comments.length; i++) {
-          if (comments[i] === undefined || comments[i] === null) {
-            comments[i] = [];
-          } else {
-            for (let j = 0; j < comments[i].length; j++) {
-              if (comments[i][j].replies === undefined) {
-                comments[i][j].replies = [];
-              } else {
-                for (let k = 0; k < comments[i][j].replies.length; k++) {
-                  comments[i][j].replies[k]["active"] = false;
-                }
-              }
-            }
-          }
-        }
-        const curUser = JSON.parse(sessionStorage.getItem("curUser"));
-        const products = JSON.parse(sessionStorage.getItem("products"));
-        console.log(products);
-        dispatch({
-          type: GET_DATA,
-          payload1: products,
-          payload2: comments,
-          payload3: curUser,
-        });
 
-        
-      } )
-  };
+  async function fetchData() {
+    const response = await fetch(PRODUCTS_URL)
+    console.log(response)
+    return response.json();
+  }
+  async function FetchUsers(){
+    const users = await fetch(USERS_URL)
+    return users.json();
+  }
+  const getData = async () => {
+    const data = await fetchData();                 
+    const parsedData = JSON.parse(data)
+    console.log(parsedData)
+    const products = parsedData
+    const comments = parsedData.map((item) => item.comments)
+    const curUsersData = await FetchUsers();
+    const curUser =  curUsersData
+                             
+    for (let i = 0; i < comments.length; i++) {
+      if (comments[i] === undefined || comments[i] === null) {
+          comments[i] = [];
+      } else {
+          for (let j = 0; j < comments[i].length; j++) {
+              comments[i][j]["active"] = false;
+              if (comments[i][j].replies === undefined) {
+                  comments[i][j].replies = [];
+              } else {
+                  for (let k = 0; k < comments[i][j].replies.length; k++) {
+                      comments[i][j].replies[k]["active"] = false;
+                  }
+              }
+          }
+      
+        }
+             } 
+    dispatch({
+      type: GET_DATA,
+      payload1: products,
+      payload2: comments,
+      payload3: curUser,
+    });
+  }
+
+
   const newComment = {
     content: "",
     id: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
@@ -129,12 +106,8 @@ export const DataState = (props) => {
   };
   // working
   const incrementUpvote = (id, index) => {
-    const updateProduct = state.products.map((item) =>
-      item.id === id ? { ...item, upvotes: item.upvotes + 1 } : item
-    );
-    sessionStorage.setItem("products", JSON.stringify(updateProduct));
-    const updatedProducts = JSON.parse(sessionStorage.getItem("products"));
-    dispatch({ type: INCREMENT, payload: updatedProducts });
+    
+    dispatch({ type: INCREMENT, payload: '2'});
   };
   // not working
   const editFeedback = () => {
