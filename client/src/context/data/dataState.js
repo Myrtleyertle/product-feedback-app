@@ -15,7 +15,7 @@ import {
   ADD_REPLY,
 } from "../types.js";
 const PRODUCTS_URL = "http://localhost:7000/products";
-const USERS_URL = "http://localhost:7000/currentusers"
+const USERS_URL = "http://localhost:7000/currentusers";
 export const DataState = (props) => {
   const newFeedback = {
     title: "",
@@ -45,50 +45,47 @@ export const DataState = (props) => {
   };
   const [state, dispatch] = useReducer(dataReducer, State);
 
-
   async function fetchData() {
-    const response = await fetch(PRODUCTS_URL)
-    console.log(response)
+    const response = await fetch(PRODUCTS_URL);
     return response.json();
   }
-  async function FetchUsers(){
-    const users = await fetch(USERS_URL)
+  async function FetchUsers() {
+    const users = await fetch(USERS_URL);
     return users.json();
   }
   const getData = async () => {
-    const data = await fetchData();                 
-    const parsedData = JSON.parse(data)
-    console.log(parsedData)
-    const products = parsedData
-    const comments = parsedData.map((item) => item.comments)
-    const curUsersData = await FetchUsers();
-    const curUser =  curUsersData
-                             
+    const data = await fetchData();
+    const users = await FetchUsers();
+    console.log(data);
+    const products = JSON.parse(data);
+    const comments = products.map((item) => item.comments);
+    const curUser = users;
+
     for (let i = 0; i < comments.length; i++) {
       if (comments[i] === undefined || comments[i] === null) {
-          comments[i] = [];
+        comments[i] = [];
       } else {
-          for (let j = 0; j < comments[i].length; j++) {
-              comments[i][j]["active"] = false;
-              if (comments[i][j].replies === undefined) {
-                  comments[i][j].replies = [];
-              } else {
-                  for (let k = 0; k < comments[i][j].replies.length; k++) {
-                      comments[i][j].replies[k]["active"] = false;
-                  }
-              }
+        for (let j = 0; j < comments[i].length; j++) {
+          comments[i][j]["active"] = false;
+          if (comments[i][j].replies === undefined) {
+            comments[i][j].replies = [];
+          } else {
+            for (let k = 0; k < comments[i][j].replies.length; k++) {
+              comments[i][j].replies[k]["active"] = false;
+            }
           }
-      
         }
-             } 
+      }
+    }
+    console.log(comments);
+    console.log(curUser)
     dispatch({
       type: GET_DATA,
       payload1: products,
       payload2: comments,
       payload3: curUser,
     });
-  }
-
+  };
 
   const newComment = {
     content: "",
@@ -105,10 +102,10 @@ export const DataState = (props) => {
     dispatch({ type: ADD_FEEDBACK, payload: newFeedback });
   };
   // working
-  const incrementUpvote = (id, index) => {
-    
-    dispatch({ type: INCREMENT, payload: '2'});
-  };
+async function incrementUpvote (url = '',data = []) {
+
+}
+
   // not working
   const editFeedback = () => {
     dispatch({ type: EDIT_FEEDBACK, payload: newFeedback });
@@ -159,6 +156,7 @@ export const DataState = (props) => {
       },
       replies: [],
     };
+    console.log(newComment);
     const newComments = [
       ...state.comments,
       state.comments[index].push(newComment),

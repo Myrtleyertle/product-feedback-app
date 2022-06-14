@@ -17,8 +17,10 @@ const Suggestions = () => {
   } = dataContext;
   
   console.log(products)
-
-    const suggestions = products.filter((feedback, index) => {
+  const suggestionObj = products.filter(
+    (product, index) => product.status === "suggestion"
+    );
+    const suggestions = suggestionObj.filter((feedback, index) => {
       if (Filter === "") {
       return feedback;
     } else if (
@@ -53,7 +55,7 @@ const Suggestions = () => {
                 className={classes.upvotebutton}
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
-                  incrementUpvote(id,index);
+                  incrementUpvote('http://localhost:7000/updates', products);
                 }}
               >
                 <img

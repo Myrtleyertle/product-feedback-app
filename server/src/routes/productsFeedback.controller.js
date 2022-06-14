@@ -1,20 +1,14 @@
-const {
-   productsArr
-} = require('../models/product.model')
-
-function getAllProducts(req, res) {
-    return res.status(200).json(productsArr)
+const { productsArr } = require("../models/product.model");
+const fs = require("fs");
+function updatedUpvotes(req, res) {
+  
 }
-
-function postUpdatedUpvotes(req, res) {
-    const productsId = req.params.products 
-    const updatedProducts = productsArr.map(product => {
-        product.id === productsId ? {...product, upvotes: product.upvotes + 1} : product
-    })
-    return res.status(200).json(updatedProducts)
+function getAllProducts(req, res) {
+    console.log(productsArr)
+  return res.status(200).json(productsArr);
 }
 
 module.exports = {
-     getAllProducts,
-     postUpdatedUpvotes
-}
+  getAllProducts,
+  updatedUpvotes,
+};

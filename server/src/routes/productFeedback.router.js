@@ -1,9 +1,9 @@
 const express = require('express');
 
-const { getAllProducts, postUpdatedUpvotes } = require('./productsFeedback.controller')
+const { getAllProducts, updatedUpvotes } = require('./productsFeedback.controller')
 
 const productsRouter = express.Router();
 
 productsRouter.get('/products', getAllProducts)
-productsRouter.post('/products', postUpdatedUpvotes )
+productsRouter.post('/updates', updatedUpvotes )
 module.exports = productsRouter;

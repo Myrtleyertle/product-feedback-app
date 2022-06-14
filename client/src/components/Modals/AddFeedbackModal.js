@@ -3,7 +3,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { DataContext } from "../../context/data/dataContext";
 const AddFeedbackModal = () => {
   const dataContext = useContext(DataContext);
-  const { newFeedback, handleClick, target, addFeedback, flipShow, show } = dataContext;
+  const { newFeedback, addFeedback, flipShow, show } = dataContext;
   const titleRef = React.useRef();
   const descriptionRef = React.useRef();
   const statusRef = React.useRef();
@@ -50,6 +50,15 @@ const AddFeedbackModal = () => {
               <option value="UX">UX</option>
               <option value="enhancement">Enhancement</option>
               <option value="bug">Bug</option>
+            </select>
+            <select
+            ref={statusRef}
+            onChange={() => {
+              newFeedback.status = statusRef.current.value
+            }}
+              style={{ padding: "15px 10px", width: "100%", border: "none" }}
+            >
+              <option value="suggestion">suggestion</option>
             </select>
             <Form.Group
               className="mb-3"

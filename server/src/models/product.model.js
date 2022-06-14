@@ -4,9 +4,6 @@ const path = require('path');
 
 const productsArr = [];
 
-function isSuggestionData(data) {
-    return data.productRequests.map(item => item.status === 'suggestion')
-}
 
 function loadSuggestionsData() {
     return new Promise((resolve, reject) => {
@@ -15,22 +12,18 @@ function loadSuggestionsData() {
             .on('data', (data) => {
                 const suggestions = JSON.parse(data)
                 const products = JSON.stringify(suggestions.productRequests)
-                console.log(products)
                 productsArr.push(products)
+                console.log(products)
             })
             .on('err', (err) => {
                 console.log(err);
                 reject(err)
             })
             .on('end', () => {
-                console.log(productsArr)
                 resolve();
             })
-        })
-    }
-    
-    
-console.log(productsArr)
+    })
+}
 module.exports = {
     loadSuggestionsData,
     productsArr,
