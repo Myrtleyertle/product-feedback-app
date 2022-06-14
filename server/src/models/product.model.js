@@ -13,7 +13,6 @@ function loadSuggestionsData() {
                 const suggestions = JSON.parse(data)
                 const products = JSON.stringify(suggestions.productRequests)
                 productsArr.push(products)
-                console.log(products)
             })
             .on('err', (err) => {
                 console.log(err);

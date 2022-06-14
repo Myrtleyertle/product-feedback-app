@@ -55,7 +55,6 @@ const Suggestions = () => {
                 className={classes.upvotebutton}
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
-                  incrementUpvote('http://localhost:7000/updates', products);
                 }}
               >
                 <img

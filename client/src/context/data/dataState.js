@@ -56,8 +56,8 @@ export const DataState = (props) => {
   const getData = async () => {
     const data = await fetchData();
     const users = await FetchUsers();
-    console.log(data);
     const products = JSON.parse(data);
+    console.log(products)
     const comments = products.map((item) => item.comments);
     const curUser = users;
 

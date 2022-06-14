@@ -11,7 +11,6 @@ const { getCurrentUsersData } = require('./models/currentUsers.model');
 
 async function startServer(){
     await loadSuggestionsData()
-    await getCurrentUsersData()
     server.listen(PORT, () => {
         console.log(`listeing on port ${PORT}`)
     })
