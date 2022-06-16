@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Select from "../Select";
-import AddFeedbackModal from "../Modals/AddFeedbackModal";
+import Select from "../../components/Select";
+import AddFeedbackModal from "../../pages/Modals/AddFeedbackModal";
 import classes from './Suggestions.module.css'
 const SuggestionHeader = ({ suggestions }) => {
   return (

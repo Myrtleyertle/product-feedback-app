@@ -2,10 +2,10 @@ import React, { useState, useContext, useRef } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import classes from "../Suggestions/Suggestions.module.css";
 import { DataContext } from "../../context/data/dataContext";
-import commentIcon from "../../shared/icon-comments.svg";
-import arrowUp from "../../shared/icon-arrow-up.svg";
-import leftArrow from "../../shared/icon-arrow-left.svg";
-import { Reply } from "../Reply";
+import commentIcon from "../../images/icon-comments.svg";
+import arrowUp from "../../images/icon-arrow-up.svg";
+import leftArrow from "../../images/icon-arrow-left.svg";
+import { Reply } from "../../components/Reply";
 const SuggestionModal = ({ index, setShowSuggestion, showSuggestion }) => {
   const dataContext = useContext(DataContext);
   const {

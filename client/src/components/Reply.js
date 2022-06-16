@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useRef, useState } from 'react'
 import { DataContext} from '../context/data/dataContext'
-import classes from './Suggestions/Suggestions.module.css'
+import classes from '../pages/Suggestions/Suggestions.module.css'
 import { Modal, Button, Form } from "react-bootstrap";
 export const Reply = ({comment, index, id }) => {
     const dataContext = useContext(DataContext)

@@ -1,14 +1,15 @@
 import React, { useEffect, useContext } from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../components/Sidebar";
 import "../App.css";
 import { DataContext } from "../context/data/dataContext";
 import Suggestions from "./Suggestions/Suggestions";
 
 export default function Desktopview() {
   const dataContext = useContext(DataContext);
-  const { getData } = dataContext;
+  const { getProducts, getUsers } = dataContext;
   useEffect(() => {
-    getData();
+    getProducts();
+    getUsers();
   }, []);
   return (
     <div

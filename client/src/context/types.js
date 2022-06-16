@@ -8,3 +8,5 @@ export const FLIP_SHOW = "FLIP_SHOW";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const ADD_REPLY = "ADD_REPLY";
 export const SET_ACTIVE_COMMENT = "SET_ACTIVE_COMMENT";
+export const SET_PRODUCTS = "SET_PRODUCTS"
+export const GET_USERS = "GET_USERS"

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classes from "./MobileNavbar.module.css";
 import Button from "react-bootstrap/esm/Button";
 import Offcanvas from "react-bootstrap/esm/Offcanvas";
-import Banner from "../Banner";
-import Sidebar from "../Sidebar";
+import Banner from "../../components/Banner";
+import Sidebar from "../../components/Sidebar";
 
 const MobileBanner = () => {
   const [show, setShow] = useState(false);

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../context/data/dataContext";
 import classes from "./RoadmapComponent.module.css";
-import commentIcon from "../../shared/icon-comments.svg";
-import arrowUp from "../../shared/icon-arrow-up.svg";
+import commentIcon from "../../images/icon-comments.svg";
+import arrowUp from "../../images/icon-arrow-up.svg";
 const RoadmapComponent = () => {
   const dataContext = useContext(DataContext);
   const { products, comments } = dataContext;

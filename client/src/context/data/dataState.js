@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DataContext } from "./dataContext";
 import { dataReducer } from "./dataReducer";
 import { useReducer } from "react";
 import {
   ADD_FEEDBACK,
-  GET_DATA,
   DELETE_FEEDBACK,
   INCREMENT,
   EDIT_FEEDBACK,
@@ -13,9 +12,10 @@ import {
   ADD_COMMENT,
   SET_ACTIVE_COMMENT,
   ADD_REPLY,
+  SET_PRODUCTS,
+  GET_USERS
 } from "../types.js";
-const PRODUCTS_URL = "http://localhost:7000/products";
-const USERS_URL = "http://localhost:7000/currentusers";
+const URL = "http://localhost:7000";
 export const DataState = (props) => {
   const newFeedback = {
     title: "",
@@ -44,49 +44,6 @@ export const DataState = (props) => {
     id: null,
   };
   const [state, dispatch] = useReducer(dataReducer, State);
-
-  async function fetchData() {
-    const response = await fetch(PRODUCTS_URL);
-    return response.json();
-  }
-  async function FetchUsers() {
-    const users = await fetch(USERS_URL);
-    return users.json();
-  }
-  const getData = async () => {
-    const data = await fetchData();
-    const users = await FetchUsers();
-    const products = JSON.parse(data);
-    console.log(products)
-    const comments = products.map((item) => item.comments);
-    const curUser = users;
-
-    for (let i = 0; i < comments.length; i++) {
-      if (comments[i] === undefined || comments[i] === null) {
-        comments[i] = [];
-      } else {
-        for (let j = 0; j < comments[i].length; j++) {
-          comments[i][j]["active"] = false;
-          if (comments[i][j].replies === undefined) {
-            comments[i][j].replies = [];
-          } else {
-            for (let k = 0; k < comments[i][j].replies.length; k++) {
-              comments[i][j].replies[k]["active"] = false;
-            }
-          }
-        }
-      }
-    }
-    console.log(comments);
-    console.log(curUser)
-    dispatch({
-      type: GET_DATA,
-      payload1: products,
-      payload2: comments,
-      payload3: curUser,
-    });
-  };
-
   const newComment = {
     content: "",
     id: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
@@ -97,15 +54,69 @@ export const DataState = (props) => {
     },
     replies: [],
   };
-  // wokring kind of ( wont remain after reload)
-  const addFeedback = (newFeedback) => {
-    dispatch({ type: ADD_FEEDBACK, payload: newFeedback });
-  };
-  // working
-async function incrementUpvote (url = '',data = []) {
 
-}
-
+  async function fetchProducts() {
+    const response = await fetch(`${URL}/products`);
+    return response.json();
+  }
+  async function FetchUsers() {
+    const users = await fetch(`${URL}/users`);
+    return users.json();
+  }
+  async function httpSumbitProducts(product) {
+    try {
+      return await fetch(`${URL}/products`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(product),
+      });
+    } catch (err) {
+      console.log(err);
+      return {
+        ok: false,
+      };
+    }
+  }
+  const getProducts = async() => {
+      const productsJson = await fetchProducts()
+      const products = JSON.parse(productsJson)
+      console.log(products)
+      const comments = products.map(product => product.comments)
+      for (let i = 0; i < comments.length; i++) {
+        if (comments[i] === undefined || comments[i] === null) {
+          comments[i] = [];
+        } else {
+          for (let j = 0; j < comments[i].length; j++) {
+            comments[i][j]["active"] = false;
+            if (comments[i][j].replies === undefined) {
+              comments[i][j].replies = [];
+            } else {
+              for (let k = 0; k < comments[i][j].replies.length; k++) {
+                comments[i][j].replies[k]["active"] = false;
+              }
+            }
+          }
+        }
+      }
+      if(productsJson){
+        dispatch({
+          type: SET_PRODUCTS,
+          payload: products,
+          payload1: comments
+        })
+      } else {
+        console.log(products)
+      }
+  }
+  const getUsers = async () => {
+       const data =  await FetchUsers()
+        console.log(data)
+          dispatch({
+            type: GET_USERS,
+            payload: data
+          })
+        
+  } 
   // not working
   const editFeedback = () => {
     dispatch({ type: EDIT_FEEDBACK, payload: newFeedback });
@@ -181,9 +192,8 @@ async function incrementUpvote (url = '',data = []) {
         activeComment: state.activeComment,
         newReply: state.newReply,
         setFilter,
-        getData,
-        addFeedback,
-        incrementUpvote,
+        getProducts,
+        getUsers,
         editFeedback,
         deleteFeedback,
         flipShow,

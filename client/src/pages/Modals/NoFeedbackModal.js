@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./ErrorModal.module.css";
-import check from '../../shared/dect.png';
+import check from '../../images/dect.png';
 import AddFeedbackButton from "./AddFeedbackButton";
 const ErrorModal = () => {
   return (

@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import Home from "./components/Home";
-import Mobileview from "./components/mobile/Mobileview";
+import Home from "./pages/Home";
+import Mobileview from "./pages/mobile/Mobileview";
 function App() {
   const [width, setWidth] = React.useState(window.innerWidth);
   useEffect(() => {

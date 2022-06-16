@@ -4,27 +4,33 @@ import {
   DELETE_FEEDBACK,
  INCREMENT,
   EDIT_FEEDBACK,
-  GET_DATA,
   SET_FILTER,
   FLIP_SHOW,
   ADD_COMMENT,
   ADD_REPLY,
   SET_ACTIVE_COMMENT,
+  SET_PRODUCTS,
+  GET_USERS,
 } from '../types.js';
 
 
 
 export const dataReducer = (state, action) => {
   switch (action.type) {
-    case GET_DATA:
-      return {
-        ...state,
-        products: action.payload1,
-        comments: action.payload2,
-        curUser: action.payload3,
-      };
+      case GET_USERS: {
+        return {
+          ...state,
+          curUser: action.payload
+        }
+      }
+      case SET_PRODUCTS:
+        return {
+          ...state,
+          products: action.payload,
+          comments: action.payload1
+        }
     case ADD_FEEDBACK:
-      console.log("working");
+      console.log(action.payload);
       return {
         ...state,
         products: [...state.products, action.payload],

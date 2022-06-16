@@ -2,9 +2,9 @@ import React, { useContext, Fragment } from "react";
 import "../../App.css";
 import { DataContext } from "../../context/data/dataContext";
 import SuggestionsHeader from "./SuggestionsHeader";
-import arrowUp from "../../shared/icon-arrow-up.svg";
-import SuggestionModal from "../Modals/SuggestionModal";
-import ErrorModal from "../Modals/NoFeedbackModal";
+import arrowUp from "../../images/icon-arrow-up.svg";
+import SuggestionModal from "../../pages/Modals/SuggestionModal";
+import ErrorModal from "../../pages/Modals/NoFeedbackModal";
 import classes from "./Suggestions.module.css";
 const Suggestions = () => {
   const dataContext = useContext(DataContext);
@@ -13,14 +13,15 @@ const Suggestions = () => {
     incrementUpvote,
     Filter,   
     setActiveComment,
-    deleteFeedback
+    deleteFeedback,
+    updateProducts
   } = dataContext;
   
   console.log(products)
   const suggestionObj = products.filter(
     (product, index) => product.status === "suggestion"
     );
-    const suggestions = suggestionObj.filter((feedback, index) => {
+    const suggestions = products.filter((feedback, index) => {
       if (Filter === "") {
       return feedback;
     } else if (
@@ -55,6 +56,8 @@ const Suggestions = () => {
                 className={classes.upvotebutton}
                 style={{ backgroundColor: "transparent", border: "none" }}
                 onClick={() => {
+                  incrementUpvote('http://localhost:7000/products', id);
+                  updateProducts()
                 }}
               >
                 <img

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../../App.css";
 import { DataContext } from "../../context/data/dataContext";
 import SuggestionsHeader from "../Suggestions/SuggestionsHeader";
-import arrowUp from "../../shared/icon-arrow-up.svg";
+import arrowUp from "../../images/icon-arrow-up.svg";
 import SuggestionModal from "../Modals/SuggestionModal";
 import ErrorModal from "../Modals/NoFeedbackModal";
 import classes from "../Suggestions/Suggestions.module.css";
