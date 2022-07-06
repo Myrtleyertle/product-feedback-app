@@ -13,16 +13,10 @@ export default function Desktopview() {
   }, []);
   return (
     <div
-    className="ui container"
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        width: "99%",
-      }}
+    className="uicontainer"
     >
       <Sidebar />
-      <Suggestions className="" />
+      <Suggestions className="Suggestions" />
     </div>
   );
 }

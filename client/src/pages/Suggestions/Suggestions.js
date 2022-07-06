@@ -21,7 +21,7 @@ const Suggestions = () => {
   const suggestionObj = products.filter(
     (product, index) => product.status === "suggestion"
     );
-    const suggestions = products.filter((feedback, index) => {
+    const suggestions = suggestionObj.filter((feedback, index) => {
       if (Filter === "") {
       return feedback;
     } else if (

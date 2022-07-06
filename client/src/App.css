@@ -1,11 +1,19 @@
 .App,body,:root{
   font-family: 'Jost', sans-serif;
   font-weight: 500;
+  height: 100vh;
+  background-color: rgb(245, 245, 245);
 }
 @media (min-width: 455px) {
-  .App {
-    flex-direction: column;
+  .uicontainer {
+    display: flex;
+    flex-direction: row;
     font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    height: 100%;
+  }
+  .Suggestions{
+    position: absolute;
   }
   .desktopview {
     display: flex;
